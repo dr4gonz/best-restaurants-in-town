@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace /*NAMESPACE*/
+namespace BestRestaurantsInTown
 {
   public class DB
   {

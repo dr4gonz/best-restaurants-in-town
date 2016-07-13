@@ -1,14 +1,16 @@
 using Nancy;
-using /*NAMESPACE.OBJECTS*/;
+using System;
+using System.Collections.Generic;
 
-namespace /*NAMESPACE*/
+namespace BestRestaurantsInTown
 {
   public class HomeModule : NancyModule
   {
     public HomeModule()
     {
-      Get["/"] View["index.cshtml"];
-    }
+      Get["/"] = _ => {
+        View["index.cshtml"];
+    };
   }
 
 }
