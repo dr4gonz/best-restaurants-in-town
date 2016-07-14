@@ -9,7 +9,7 @@ namespace BestRestaurantsInTown
         public HomeModule()
         {
             Get["/"] = _ => {
-                View["index.cshtml"];
+                return View["index.cshtml"];
             };
         }
     }

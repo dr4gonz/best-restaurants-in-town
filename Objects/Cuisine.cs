@@ -137,7 +137,7 @@ namespace BestRestaurantsInTown
       SqlCommand cmd = new SqlCommand("UPDATE cuisines SET cuisine_type = @NewCuisineType OUTPUT INSERTED.cuisine_type WHERE id = @CuisineId;", conn);
 
       SqlParameter cuisineTypeParameter = new SqlParameter();
-      cuisineTypeParameter.ParameterName = "@NewType";
+      cuisineTypeParameter.ParameterName = "@NewCuisineType";
       cuisineTypeParameter.Value = newCuisineType;
       cmd.Parameters.Add(cuisineTypeParameter);
 
