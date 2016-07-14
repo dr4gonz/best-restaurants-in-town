@@ -102,5 +102,22 @@ namespace BestRestaurantsInTown
       Assert.Equal(expectedPhone, actualPhone);
       Assert.Equal(expectedEmail, actualEmail);
     }
+
+    [Fact]
+    public void Restaurant_ReturnsReviewsByRestaurant()
+    {
+      //Arrange
+      Restaurant newRestaurant = new Restaurant("Yama", 1, "unforgettable japanese dining experience", "926 NW 10th Avenue, Portland, OR 97209", "503.841.5463", "none@none.com");
+      newRestaurant.Save();
+      DateTime newDate = new DateTime(2016,7,13);
+
+      Review testReview = new Review("Matt", "Best Restaurant", "This is the best restaurant EVER", newDate, newRestaurant.GetId());
+      testReview.Save();
+      List<Review> expectedResult = new List<Review>{testReview};
+      //Act
+      List<Review> result = newRestaurant.GetAllReviews();
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
   }
 }

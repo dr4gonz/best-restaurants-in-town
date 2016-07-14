@@ -259,5 +259,36 @@ namespace BestRestaurantsInTown
       if (rdr != null) rdr.Close();
       if (conn != null) conn.Close();
     }
+
+    public List<Review> GetAllReviews()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM reviews WHERE restaurant_id = @RestaurantId ORDER BY date_time;", conn);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = _id;
+      cmd.Parameters.Add(restaurantIdParameter);
+      rdr = cmd.ExecuteReader();
+      List<Review> allReviews = new List<Review>{};
+      while(rdr.Read())
+      {
+        int reviewId = rdr.GetInt32(0);
+        string userName = rdr.GetString(1);
+        string reviewTitle = rdr.GetString(2);
+        string reviewText = rdr.GetString(3);
+        DateTime? reviewDate = rdr.GetDateTime(4);
+        int reviewRestaurantId = rdr.GetInt32(5);
+        Review newReview = new Review(userName, reviewTitle, reviewText, reviewDate, reviewRestaurantId, reviewId);
+        allReviews.Add(newReview);
+      }
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+
+      return allReviews;
+    }
   }
 }
