@@ -158,5 +158,37 @@ namespace BestRestaurantsInTown
 
     }
 
+    public List<Restaurant> GetRestaurants()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE cuisine_id = @CuisineId;", conn);
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(cuisineIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      List<Restaurant> restaurants = new List<Restaurant> {};
+      while(rdr.Read())
+      {
+        int restaurantId = rdr.GetInt32(0);
+        string restaurantName = rdr.GetString(1);
+        int restaurantCuisineId = rdr.GetInt32(2);
+        string restaurantDescription = rdr.GetString(3);
+        string restaurantAddress = rdr.GetString(4);
+        string restaurantPhone = rdr.GetString(5);
+        string restaurantEmail = rdr.GetString(6);
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCuisineId, restaurantDescription, restaurantAddress, restaurantPhone, restaurantEmail, restaurantId);
+        restaurants.Add(newRestaurant);
+      }
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+
+      return restaurants;
+    }
+
   }
 }

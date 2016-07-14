@@ -85,5 +85,32 @@ namespace BestRestaurantsInTown
           //Assert
           Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void Cuisine_GetsAllRestaurantsInCuisine()
+        {
+          Cuisine testCuisine = new Cuisine("Japanese");
+          testCuisine.Save();
+
+          Restaurant firstRestaurant = new Restaurant("Yama", testCuisine.GetId(), "unforgettable japanese dining experience", "926 NW 10th Avenue, Portland, OR 97209", "503.841.5463", "none@none.com");
+          firstRestaurant.Save();
+
+          Restaurant secondRestaurant = new Restaurant("Marinepolis Sushi Land", testCuisine.GetId(), "conveyer-belt sushi restaurant", "138 NW 10th Ave, Portland, OR 97209", "503.546.9933", "none@none.com");
+          secondRestaurant.Save();
+
+          Restaurant thirdRestaurant = new Restaurant("Saburo", testCuisine.GetId(), "no-frills japanese restaurant", "1667 SE Bybee Blvd, Portland, OR 97202", "503.236.4237", "none@none.com");
+          thirdRestaurant.Save();
+
+          List<Restaurant> expectedList = new List<Restaurant> {firstRestaurant, secondRestaurant, thirdRestaurant};
+          Console.WriteLine("restaurant 1: " + expectedList[0].GetName() + " " + expectedList[0].GetId());
+          Console.WriteLine("restaurant 2: " + expectedList[1].GetName() + " " + expectedList[1].GetId());
+          Console.WriteLine("restaurant 3: " + expectedList[2].GetName() + " " + expectedList[2].GetId());
+          List<Restaurant> testList = testCuisine.GetRestaurants();
+          Console.WriteLine("restaurant 1: " + testList[0].GetName() + " " + testList[0].GetId());
+          Console.WriteLine("restaurant 2: " + testList[1].GetName() + " " + testList[1].GetId());
+          Console.WriteLine("restaurant 3: " + testList[2].GetName() + " " + testList[2].GetId());
+
+          Assert.Equal(expectedList, testList);
+        }
     }
 }

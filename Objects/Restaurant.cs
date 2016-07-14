@@ -17,9 +17,9 @@ namespace BestRestaurantsInTown
 
     public Restaurant(string name, int cuisineId, string description, string address, string phoneNumber, string email, int Id = 0)
     {
+      _id = Id;
       _name = name;
       _cuisineId = cuisineId;
-      _id = Id;
       _description = description;
       _address = address;
       _phoneNumber = phoneNumber;
