@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="content/js/bootstrap.min.js" type="text/js"></script>
+    <title>Best Restaurants In Town</title>
+  </head>
+  <body>
+    <form class="form-horizontal" action="/reviews/add" method="post" role="form">
+      <div class="form-group">
+        <label class="control-label col-md-2" for="user-name">User Name</label>
+        <div class="col-md-6">
+          <input type="text" name="user-name" id="user-name" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="review-title">Review Title</label>
+        <div class="col-md-6">
+          <input type="text" name="review-title" id="review-title" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="review-text">Review Text</label>
+        <div class="col-md-6">
+          <textarea type="text" name="review-text" id="review-text" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="review-date">Date</label>
+        <div class="col-md-6">
+          <input type="date" name="review-date" id="review-date" class="form-control">
+        </div>
+      </div>
+      <input type="hidden" name="restaurant-id" value="@Model">
+
+
+      <button class="btn btn-primary btn-small" type="submit" name="add-review">Add Review!</button>
+    </form>
+  </body>
+</html>

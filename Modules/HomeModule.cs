@@ -39,10 +39,36 @@ namespace BestRestaurantsInTown
               return View["restaurant_list.cshtml", allRestaurants];
             };
 
+            Get["/restaurant/{id}"] = parameters => {
+              Restaurant restaurant = Restaurant.Find(parameters.id);
+              return View["restaurant.cshtml", restaurant];
+            };
+
             Get["/cuisine/{id}"] = parameters => {
               Cuisine cuisine = Cuisine.Find(parameters.id);
               List<Restaurant> restarantsInCuisine = cuisine.GetRestaurants();
               return View["restaurant_list.cshtml", restarantsInCuisine];
+            };
+
+            Get["/reviews/add/{id}"] = parameters => {
+              int restaurantId = parameters.id;
+              return View["add_review.cshtml", restaurantId];
+            };
+            Post["/reviews/add/{id}"] = parameters => {
+              int restaurantId = parameters.id;
+              return View["add_review.cshtml", restaurantId];
+            };
+
+            Post["/reviews/add"] = _ => {
+              string userName = Request.Form["user-name"];
+              string reviewTitle = Request.Form["review-title"];
+              string reviewText = Request.Form["review-text"];
+              DateTime? reviewDate = Request.Form["review-date"];
+              int restaurantId = Request.Form["restaurant-id"];
+              Review newReview = new Review(userName, reviewTitle, reviewText, reviewDate, restaurantId);
+              newReview.Save();
+              Restaurant restaurant = Restaurant.Find(restaurantId);
+              return View["restaurant.cshtml", restaurant];
             };
 
 

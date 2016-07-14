@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="content/js/bootstrap.min.js" type="text/js"></script>
+    <title>Best Restaurants In Town</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-8">
+        <h2>@Model.GetName()</h2>
+        <h6>@Model.GetDescription()</h6>
+        <p>@Model.GetAddress()</p>
+        <p>@Model.GetPhone()</p>
+        <p>@Model.GetEmail()</p>
+        <div class="col-md-8">
+          <h4>Reviews: </h4>
+          <ul>
+            @if(Model.GetAllReviews().Count == 0)
+            {
+              <p>There are no reviews yet! <a href="/reviews/add/@Model.GetId()">Click Here</a> to add a review!</p>
+            }
+            else
+            {
+              @foreach (var review in Model.GetAllReviews())
+              {
+                <div class="review-body">
+                  <h3>@review.GetReviewTitle() - By: @review.GetUserName()</h3>
+                  <p>@review.GetDate()</p>
+                  <p>@review.GetReviewText()</p>
+                </div>
+              }
+            }
+          </ul>
+          <p><a href="/reviews/add/@Model.GetId()">Add a Review</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
