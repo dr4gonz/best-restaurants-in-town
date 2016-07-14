@@ -55,11 +55,13 @@ namespace BestRestaurantsInTown
       Restaurant testRestaurant = new Restaurant("Yama", 1, "unforgettable japanese dining experience", "926 NW 10th Avenue, Portland, OR 97209", "503.841.5463", "none@none.com");
       //Act
       testRestaurant.Save();
-      int result = Restaurant.GetAll()[0].GetId();
+      Restaurant savedRestaurant = Restaurant.GetAll()[0];
+      int result = savedRestaurant.GetId();
       int expectedResult = testRestaurant.GetId();
       //Assert
       Assert.Equal(expectedResult, result);
     }
+
     [Fact]
     public void Restaurant_FindReturnsCorrectRestaurant()
     {

@@ -73,14 +73,14 @@ namespace BestRestaurantsInTown
         else
         {
             Restaurant newRestaurant = (Restaurant) otherRestaurant;
-            bool nameEquality = (this.GetName() == newRestaurant.GetName());
-            bool idEquality = (this.GetId() == newRestaurant.GetId());
-            bool cuisineEquality = (this.GetCuisineId() == newRestaurant.GetCuisineId());
-            bool descriptionEquality = (this.GetDescription() == newRestaurant.GetDescription());
-            bool addressEquality = (this.GetAddress() == newRestaurant.GetAddress());
-            bool phoneNumberEquality = (this.GetPhone() == newRestaurant.GetPhone());
-            bool emailEquality = (this.GetEmail() == newRestaurant.GetEmail());
-            return (nameEquality && idEquality && cuisineEquality && addressEquality && phoneNumberEquality && emailEquality);
+            bool nameEquality = (_name == newRestaurant.GetName());
+            bool idEquality = (_id == newRestaurant.GetId());
+            bool cuisineEquality = (_cuisineId == newRestaurant.GetCuisineId());
+            bool descriptionEquality = (_description == newRestaurant.GetDescription());
+            bool addressEquality = (_address == newRestaurant.GetAddress());
+            bool phoneNumberEquality = (_phoneNumber == newRestaurant.GetPhone());
+            bool emailEquality = (_email == newRestaurant.GetEmail());
+            return (nameEquality && idEquality && cuisineEquality && descriptionEquality && addressEquality && phoneNumberEquality && emailEquality);
         }
     }
 
@@ -123,38 +123,38 @@ namespace BestRestaurantsInTown
 
       SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@NewName";
-      newNameParameter.Value = this.GetName();
+      newNameParameter.Value = _name;
       cmd.Parameters.Add(newNameParameter);
 
       SqlParameter newCuisineIdParameter = new SqlParameter();
       newCuisineIdParameter.ParameterName = "@NewCuisineId";
-      newCuisineIdParameter.Value = this.GetCuisineId();
+      newCuisineIdParameter.Value = _cuisineId;
       cmd.Parameters.Add(newCuisineIdParameter);
 
       SqlParameter newDescriptionParameter = new SqlParameter();
       newDescriptionParameter.ParameterName = "@NewDescription";
-      newDescriptionParameter.Value = this.GetDescription();
+      newDescriptionParameter.Value = _description;
       cmd.Parameters.Add(newDescriptionParameter);
 
       SqlParameter newAddressParameter = new SqlParameter();
       newAddressParameter.ParameterName = "@NewAddress";
-      newAddressParameter.Value = this.GetAddress();
+      newAddressParameter.Value = _address;
       cmd.Parameters.Add(newAddressParameter);
 
       SqlParameter newPhoneParameter = new SqlParameter();
       newPhoneParameter.ParameterName = "@NewPhone";
-      newPhoneParameter.Value = this.GetPhone();
+      newPhoneParameter.Value = _phoneNumber;
       cmd.Parameters.Add(newPhoneParameter);
 
       SqlParameter newEmailParameter = new SqlParameter();
       newEmailParameter.ParameterName = "@NewEmail";
-      newEmailParameter.Value = this.GetEmail();
+      newEmailParameter.Value = _email;
       cmd.Parameters.Add(newEmailParameter);
 
       rdr = cmd.ExecuteReader();
       while (rdr.Read())
       {
-        this._id = rdr.GetInt32(0);
+        _id = rdr.GetInt32(0);
       }
 
       if (rdr != null) rdr.Close();

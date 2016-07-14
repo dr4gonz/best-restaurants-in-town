@@ -39,9 +39,9 @@ namespace BestRestaurantsInTown
       else
       {
         Cuisine newCuisine = (Cuisine) otherCuisine;
-        bool cuisineIdEquality = this.GetId() == newCuisine.GetId();
-        bool cuisineTypeEquality = this.GetCuisineType() == newCuisine.GetCuisineType();
-        return (cuisineIdEquality == cuisineTypeEquality);
+        bool cuisineIdEquality = (_id == newCuisine.GetId());
+        bool cuisineTypeEquality = (_cuisineType == newCuisine.GetCuisineType());
+        return (cuisineIdEquality && cuisineTypeEquality);
       }
     }
 
@@ -85,7 +85,7 @@ namespace BestRestaurantsInTown
       SqlCommand cmd = new SqlCommand("INSERT INTO cuisines (cuisine_type) OUTPUT INSERTED.id VALUES(@CuisineType);", conn);
       SqlParameter cuisineTypeParameter = new SqlParameter();
       cuisineTypeParameter.ParameterName = "@CuisineType";
-      cuisineTypeParameter.Value = this.GetCuisineType();
+      cuisineTypeParameter.Value = _cuisineType;
       cmd.Parameters.Add(cuisineTypeParameter);
 
       rdr = cmd.ExecuteReader();
@@ -107,7 +107,7 @@ namespace BestRestaurantsInTown
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines WHERE id = @CuisineId;", conn);
       SqlParameter cuisineIdParameter = new SqlParameter();
-      cuisineIdParameter.ParameterName = "@cuisineId";
+      cuisineIdParameter.ParameterName = "@CuisineId";
       cuisineIdParameter.Value = id.ToString();
       cmd.Parameters.Add(cuisineIdParameter);
       rdr = cmd.ExecuteReader();
