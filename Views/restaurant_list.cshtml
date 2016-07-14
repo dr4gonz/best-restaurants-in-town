@@ -1,0 +1,6 @@
+<ul>
+  @foreach (var restaurant in Model)
+  {
+    <li>@restaurant.GetName() - @restaurant.GetDescription()</li>
+  }
+</ul>

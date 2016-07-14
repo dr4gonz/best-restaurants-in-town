@@ -39,13 +39,13 @@ namespace BestRestaurantsInTown
               return View["restaurant_list.cshtml", allRestaurants];
             };
 
-            Get["/category/{id}"] = parameters => {
+            Get["/cuisine/{id}"] = parameters => {
               Cuisine cuisine = Cuisine.Find(parameters.id);
               List<Restaurant> restarantsInCuisine = cuisine.GetRestaurants();
               return View["restaurant_list.cshtml", restarantsInCuisine];
             };
 
-            
+
         }
     }
 }
