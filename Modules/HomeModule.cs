@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace BestRestaurantsInTown
 {
-  public class HomeModule : NancyModule
-  {
-    public HomeModule()
+    public class HomeModule : NancyModule
     {
-      Get["/"] = _ => {
-        View["index.cshtml"];
-    };
-  }
-
+        public HomeModule()
+        {
+            Get["/"] = _ => {
+                View["index.cshtml"];
+            };
+        }
+    }
 }

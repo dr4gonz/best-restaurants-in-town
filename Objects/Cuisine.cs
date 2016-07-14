@@ -25,14 +25,12 @@ namespace BestRestaurantsInTown
       return _id;
     }
 
-    public void SetCuisineType(string cuisineType)
+    public static void DeleteAll()
     {
-      _cuisineType = cuisineType;
-    }
-
-    public void SetId(int id)
-    {
-      _id = id;
+        SqlConnection conn = DB.Connection();
+        conn.Open();
+        SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+        cmd.ExecuteNonQuery();
     }
 
     public override bool Equals(System.Object otherCuisine)
@@ -45,14 +43,6 @@ namespace BestRestaurantsInTown
         bool cuisineTypeEquality = this.GetCuisineType() == newCuisine.GetCuisineType();
         return (cuisineIdEquality == cuisineTypeEquality);
       }
-    }
-
-    public static void DeleteAll()
-    {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
-      cmd.ExecuteNonQuery();
     }
 
     public static List<Cuisine> GetAll()

@@ -10,7 +10,7 @@ namespace BestRestaurantsInTown
     {
         public CuisineTest()
         {
-            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=best_restaurants_test;Integrated Security=SSPI;";
+            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=BestRestaurants_test;Integrated Security=SSPI;";
         }
         public void Dispose()
         {
@@ -26,7 +26,7 @@ namespace BestRestaurantsInTown
         }
 
         [Fact]
-        public void Cuisine_AreEquals()
+        public void Cuisine_AreEqual()
         {
           //Arrange, Act
           Cuisine firstCuisine = new Cuisine("Japanese");
@@ -61,7 +61,7 @@ namespace BestRestaurantsInTown
         }
 
         [Fact]
-        public void Cuisine_FindsInDatabase()
+        public void Cuisine_FindsReturnsCorrectCuisine()
         {
           //Arrange
           Cuisine testCuisine = new Cuisine("Japanese");
@@ -73,7 +73,7 @@ namespace BestRestaurantsInTown
         }
 
         [Fact]
-        public void Cuisine_UpdateSavedCuisine()
+        public void Cuisine_UpdateCuisineName()
         {
           //Arrange
           Cuisine testCuisine = new Cuisine("Japanese");

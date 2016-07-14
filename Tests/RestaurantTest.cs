@@ -10,7 +10,7 @@ namespace BestRestaurantsInTown
   {
     public RestaurantTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=best_restaurants_test;Integrated Security=SSPI;";
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=BestRestaurants_test;Integrated Security=SSPI;";
     }
     public void Dispose()
     {
@@ -18,7 +18,7 @@ namespace BestRestaurantsInTown
     }
 
     [Fact]
-    public void Restaurant_DatabaseEmpty()
+    public void Restaurant_DatabaseEmptyToStart()
     {
       //Arrange, Act
       int result = Restaurant.GetAll().Count;
@@ -27,11 +27,11 @@ namespace BestRestaurantsInTown
     }
 
     [Fact]
-    public void Restaurant_RestaurantsAreSame_True()
+    public void Restaurant_AreEqual()
     {
       //Arrange, Act
-      Restaurant firstRestaurant = new Restaurant("El Nutritaco", 1);
-      Restaurant secondRestaurant = new Restaurant("El Nutritaco", 1);
+      Restaurant firstRestaurant = new Restaurant("Yama", 1);
+      Restaurant secondRestaurant = new Restaurant("Yama", 1);
       //Assert
       Assert.Equal(firstRestaurant, secondRestaurant);
     }
@@ -40,7 +40,7 @@ namespace BestRestaurantsInTown
     public void Restaurant_SavesToDatabase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("El Nutritaco", 1);
+      Restaurant testRestaurant = new Restaurant("Yama", 1);
       //Act
       testRestaurant.Save();
       Restaurant savedRestaurant = Restaurant.GetAll()[0];
@@ -52,7 +52,7 @@ namespace BestRestaurantsInTown
     public void Restaurant_SavesWithId()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("El Nutritaco", 1);
+      Restaurant testRestaurant = new Restaurant("Yama", 1);
       //Act
       testRestaurant.Save();
       int result = Restaurant.GetAll()[0].GetId();
@@ -61,10 +61,10 @@ namespace BestRestaurantsInTown
       Assert.Equal(expectedResult, result);
     }
     [Fact]
-    public void Restaurant_Find()
+    public void Restaurant_FindReturnsCorrectRestaurant()
     {
       //Arrange
-      Restaurant newRestaurant = new Restaurant("Los Gorditos", 1);
+      Restaurant newRestaurant = new Restaurant("Sakura", 1);
       newRestaurant.Save();
       //Act
       Restaurant foundRestaurant = Restaurant.Find(newRestaurant.GetId());
@@ -73,15 +73,15 @@ namespace BestRestaurantsInTown
     }
 
     [Fact]
-    public void Restaurant_Update()
+    public void Restaurant_UpdatesRestaurantName()
     {
       //Arrange
-      Restaurant newRestaurant = new Restaurant("Let's Eat Thai", 2);
-      string expectedName = "Los Gorditos";
+      Restaurant newRestaurant = new Restaurant("Pok Pok", 2);
+      string expectedName = "Sakura";
       int expectedCuisineId = 1;
       newRestaurant.Save();
       //Act
-      newRestaurant.Update("Los Gorditos", 1);
+      newRestaurant.Update("Sakura", 1);
       string actualName = newRestaurant.GetName();
       int actualCuisineId = newRestaurant.GetCuisineId();
       //Assert

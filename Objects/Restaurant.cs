@@ -29,14 +29,6 @@ namespace BestRestaurantsInTown
     {
       return _cuisineId;
     }
-    public void SetName(string newName)
-    {
-      _name = newName;
-    }
-    public void SetCuisineId(int newId)
-    {
-      _cuisineId = newId;
-    }
 
     public static void DeleteAll()
     {
@@ -44,6 +36,22 @@ namespace BestRestaurantsInTown
       conn.Open();
       SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
       cmd.ExecuteNonQuery();
+    }
+    
+    public override bool Equals(System.Object otherRestaurant)
+    {
+        if(!(otherRestaurant is Restaurant))
+        {
+            return false;
+        }
+        else
+        {
+            Restaurant newRestaurant = (Restaurant) otherRestaurant;
+            bool nameEquality = (this._name == newRestaurant.GetName());
+            bool idEquality = (this._id == newRestaurant.GetId());
+            bool cuisineEquality = (this._cuisineId == newRestaurant.GetCuisineId());
+            return (nameEquality && idEquality && cuisineEquality);
+        }
     }
 
     public static List<Restaurant> GetAll()
@@ -70,21 +78,6 @@ namespace BestRestaurantsInTown
       return allRestaurants;
     }
 
-    public override bool Equals(System.Object otherRestaurant)
-    {
-      if(!(otherRestaurant is Restaurant))
-      {
-        return false;
-      }
-      else
-      {
-        Restaurant newRestaurant = (Restaurant) otherRestaurant;
-        bool nameEquality = (this._name == newRestaurant.GetName());
-        bool idEquality = (this._id == newRestaurant.GetId());
-        bool cuisineEquality = (this._cuisineId == newRestaurant.GetCuisineId());
-        return (nameEquality && idEquality && cuisineEquality);
-      }
-    }
 
     public void Save()
     {
