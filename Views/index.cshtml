@@ -2,23 +2,39 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="content/js/bootstrap.min.js" type="text/js"></script>
     <title>Best Restaurants In Town</title>
   </head>
   <body>
-<a href="/cuisine/add"><button type="button" name="button">Add Cuisine</button></a>
-<a href="/restaurant/add"><button type="button" name="button">Add Restaurant</button></a>
-<a href="/restaurant/all"><button type="button" name="button">View All Restaurants</button></a>
-@if(Model.Count < 1)
-{
-  <p>No Cuisines or Restaurants Added Yet</p>
-}
-else{
-  <ul>
-    @foreach (var cuis in Model)
-    {
-      <li><a href="/cuisine/@cuis.GetId()">@cuis.GetCuisineType()</a></li>
-    }
-  </ul>
-}
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Welcome to the Best Restaurants in Portland!<h2>
+        <div class="col-md-8 col-md-offset-2">
+          <h4>Add a Cuisine or Restaurant</h4>
+          <a href="/cuisine/add"><button class="btn btn-primary btn-sm" type="button" name="button">Add Cuisine</button></a>
+          <a href="/restaurant/add"><button class="btn btn-primary btn-sm" type="button" name="button">Add Restaurant</button></a>
+          <a href="/restaurant/all"><button class="btn btn-primary btn-sm" type="button" name="button">View All Restaurants</button></a>
+        </div>
+        @if(Model.Count < 1)
+        {
+          <div class="col-md-6 col-md-offset-2">
+            <h3>Cuisines:</h3>
+            <p>No Cuisines or Restaurants Added Yet</p>
+          </div>
+        }
+        else
+        {
+          <div class="col-md-6 col-md-offset-2">
+            <h3>Cuisines:</h3>
+            <ul class="list-group">
+              @foreach (var cuis in Model)
+              {
+                <li class="list-group-item"><a href="/cuisine/@cuis.GetId()">@cuis.GetCuisineType()</a></li>
+              }
+            </ul>
+          </div>
+        }
+    </div>
   </body>
 </html>

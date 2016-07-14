@@ -1,6 +1,18 @@
-<ul>
-  @foreach (var restaurant in Model)
-  {
-    <li>@restaurant.GetName() - @restaurant.GetDescription()</li>
-  }
-</ul>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="content/js/bootstrap.min.js" type="text/js"></script>
+    <title>Best Restaurants In Town</title>
+  </head>
+  <body>
+    <ul>
+      @foreach (var restaurant in Model)
+      {
+        <li>@restaurant.GetName() - @restaurant.GetDescription()</li>
+      }
+    </ul>
+  </body>
+</html>
